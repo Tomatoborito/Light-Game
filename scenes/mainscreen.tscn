@@ -1,0 +1,100 @@
+[gd_scene load_steps=7 format=3 uid="uid://bmi534qrrv0fa"]
+
+[ext_resource type="FontFile" uid="uid://bjuntl3v11s0n" path="res://assets/ethnocentric/ethnocentric rg.otf" id="1_uh1la"]
+[ext_resource type="Script" path="res://scenes/mainscreen.gd" id="2_wpjer"]
+
+[sub_resource type="Theme" id="Theme_rkcqa"]
+default_font = ExtResource("1_uh1la")
+
+[sub_resource type="Theme" id="Theme_3i6sj"]
+VBoxContainer/constants/separation = 13
+
+[sub_resource type="Theme" id="Theme_mig3d"]
+Label/font_sizes/font_size = 30
+
+[sub_resource type="Theme" id="Theme_r5gl7"]
+default_font_size = 25
+
+[node name="mainscreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_rkcqa")
+script = ExtResource("2_wpjer")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -226.5
+offset_top = -98.5
+offset_right = 226.5
+offset_bottom = 98.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_3i6sj")
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer2"]
+layout_mode = 2
+theme = SubResource("Theme_mig3d")
+text = "= spectrum abyss ="
+horizontal_alignment = 1
+
+[node name="play" type="Button" parent="Panel/VBoxContainer2"]
+layout_mode = 2
+text = "play"
+
+[node name="options" type="Button" parent="Panel/VBoxContainer2"]
+layout_mode = 2
+text = "options"
+
+[node name="exit" type="Button" parent="Panel/VBoxContainer2"]
+layout_mode = 2
+text = "exit"
+
+[node name="Label2" type="Label" parent="Panel/VBoxContainer2"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -44.0
+offset_top = -220.0
+offset_right = 44.0
+offset_bottom = -149.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_r5gl7")
+
+[node name="score" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "sdfsdf"
+
+[node name="kills" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "sdfdsf"
+
+[node name="Time survived" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "sdfg"
+
+[connection signal="pressed" from="Panel/VBoxContainer2/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer2/options" to="." method="_on_options_pressed"]

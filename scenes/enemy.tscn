@@ -1,0 +1,91 @@
+[gd_scene load_steps=11 format=3 uid="uid://cdimgu1votjt1"]
+
+[ext_resource type="Script" path="res://scripts/ColorRect.gd" id="1_605ps"]
+[ext_resource type="Texture2D" uid="uid://xplafmg736al" path="res://assets/slime-Sheet.png" id="2_68x5k"]
+[ext_resource type="Script" path="res://scripts/AnimatedSprite2D.gd" id="3_t5283"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mdj05"]
+atlas = ExtResource("2_68x5k")
+region = Rect2(0, 0, 32, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wwcbr"]
+atlas = ExtResource("2_68x5k")
+region = Rect2(32, 0, 32, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0qsh0"]
+atlas = ExtResource("2_68x5k")
+region = Rect2(64, 0, 32, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h0ywe"]
+atlas = ExtResource("2_68x5k")
+region = Rect2(96, 0, 32, 25)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_th4b7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mdj05")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wwcbr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0qsh0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h0ywe")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3dio3"]
+radius = 3.0
+height = 18.0
+
+[sub_resource type="Environment" id="Environment_5x7pg"]
+background_mode = 3
+background_energy_multiplier = 1.4
+glow_enabled = true
+glow_blend_mode = 1
+
+[node name="enemy" type="CharacterBody2D"]
+process_mode = 1
+light_mask = 2
+visibility_layer = 2
+z_index = 10
+scale = Vector2(0.7, 0.7)
+collision_layer = 16384
+collision_mask = 0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+light_mask = 512
+visibility_layer = 512
+offset_left = -12.0
+offset_top = -8.0
+offset_right = 13.0
+offset_bottom = -4.0
+script = ExtResource("1_605ps")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(1.2, 1.2, 1.2, 1)
+sprite_frames = SubResource("SpriteFrames_th4b7")
+autoplay = "default"
+script = ExtResource("3_t5283")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 8)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_3dio3")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5x7pg")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="AnimatedSprite2D" method="_on_timer_timeout"]
